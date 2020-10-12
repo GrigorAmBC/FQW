@@ -1,0 +1,21 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+
+  <a (click)="initiateRecording()" class="btn btn-primary" *ngIf="!recording"> Start Recording </a>
+  <a (click)="stopRecording()" class="btn btn-danger" *ngIf="recording"> Stop Recording </a>
+  <div class="clearfix"></div>
+  <audio controls="" *ngIf="url">
+    <source [src]="sanitize(url)" type="audio/wav">
+  </audio>
+
+  <button (click)="speechToText()">Translate speech to text</button>
+  <button (click)="downloadAudio()" *ngIf="url">Download audio</button>
+</div>
+<textarea id="recognize_conten" > </textarea>
+
+<div>
+  <a (click)="startStreaming()" *ngIf="!streaming">Start streaming</a>
+  <a (click)="stopStreaming()" *ngIf="streaming">Stop streaming</a>
+</div>
