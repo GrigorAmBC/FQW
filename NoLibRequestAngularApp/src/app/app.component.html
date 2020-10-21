@@ -10,12 +10,19 @@
     <source [src]="sanitize(url)" type="audio/wav">
   </audio>
 
-  <button (click)="speechToText()">Translate speech to text</button>
+  <button (click)="recordedAudioToText()">Translate recorded audio</button>
+  <button (click)="speechToTextLongRunning()">Translate audio file</button>
   <button (click)="downloadAudio()" *ngIf="url">Download audio</button>
+  <input type="file" accept="audio/wav" capture id="recorder" (change)="onFileChange($event)">
 </div>
-<textarea id="recognize_conten" > </textarea>
-
-<div>
-  <a (click)="startStreaming()" *ngIf="!streaming">Start streaming</a>
-  <a (click)="stopStreaming()" *ngIf="streaming">Stop streaming</a>
-</div>
+<button (click)="uploadFile()" >Upload file</button>
+<button (click)="signInWithGoogle()" >Login</button>
+<head>
+  <meta name="url" content="https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:4200/&prompt=consent&response_type=code&client_id=488169954951-ci2554if1a5ndjf7icd9l8b88uquc3id.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/devstorage.full_control&access_type=offline">
+</head>
+<br>
+<br>
+<input type="number" id="numberOfSpeakers" name="sdlkmfsa">
+<br>
+<br>
+<textarea id="recognize_conten" rows="8" cols="60"> </textarea>
