@@ -14,18 +14,11 @@ export class BucketStorageService {
   }
 
   blobToFile(theBlob: Blob, fileName: string): File {
-    var b: any = theBlob;
-    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    const b: any = theBlob;
     b.lastModifiedDate = new Date();
     b.name = fileName;
 
-    //Cast to a File() type
     return <File><unknown>theBlob;
-  }
-
-  mp3ToWav(file) {
-    const mp32Wav = new Mp32Wav(file.name, "./");
-    
   }
 
   async uploadFile(file) {

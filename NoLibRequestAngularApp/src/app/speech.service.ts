@@ -4,7 +4,6 @@ import {IDialogPart, IRecognizeResponse} from './types';
 import {google} from "@google-cloud/speech/build/protos/protos";
 import Operation = google.longrunning.Operation;
 import ISpeechRecognitionResult = google.cloud.speech.v1.ISpeechRecognitionResult;
-import {UploadResponse} from "@google-cloud/storage";
 
 @Injectable({
   providedIn: 'root'

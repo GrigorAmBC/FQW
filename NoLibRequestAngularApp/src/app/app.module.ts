@@ -4,25 +4,24 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {SocialLoginModule, SocialAuthServiceConfig} from 'angularx-social-login';
 import {
   GoogleLoginProvider,
-  FacebookLoginProvider,
-  AmazonLoginProvider,
 } from 'angularx-social-login';
 import {FormsModule} from "@angular/forms";
-
+import {AppRoutingModule, routingComponents} from "./app-routing.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    routingComponents
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        SocialLoginModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    SocialLoginModule,
+    FormsModule,
+    AppRoutingModule,
+  ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {

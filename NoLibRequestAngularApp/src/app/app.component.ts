@@ -7,7 +7,8 @@ import {google} from "@google-cloud/speech/build/protos/protos";
 import ISpeechRecognitionResult = google.cloud.speech.v1.ISpeechRecognitionResult;
 import {BucketStorageService} from "./bucket-storage.service";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -31,11 +32,12 @@ export class AppComponent {
   private loggedIn: boolean;
   private gsAudioUri: string;
 
-  constructor(private http: HttpClient, private authService: SocialAuthService, private bucketService: BucketStorageService, private speechService: SpeechService, private domSanitizer: DomSanitizer) {
+  constructor(private router: Router, private http: HttpClient, private authService: SocialAuthService, private bucketService: BucketStorageService, private speechService: SpeechService, private domSanitizer: DomSanitizer) {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
     });
+    // this.router.navigate([`./meet`]);
   }
 
   signInWithRest() {
