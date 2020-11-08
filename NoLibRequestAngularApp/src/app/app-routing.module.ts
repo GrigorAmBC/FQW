@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {MeetComponent} from "./meet/meet.component";
-import {AppComponent} from "./app.component";
+import {MeetComponent} from "./components/meet/meet.component";
+import {AppComponent} from "./components/main/app.component";
 
 const routes: Routes = [
   // {path: '', component: MeetComponent},

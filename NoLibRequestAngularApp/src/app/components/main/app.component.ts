@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {SpeechService} from "./speech.service"
+import {SpeechService} from "../../services/google/speech.service"
 import {DomSanitizer} from '@angular/platform-browser';
 import * as RecordRTC from 'recordrtc';
-import {IDialogPart} from "./types";
+import {IDialogPart} from "../../services/google/types";
 import {google} from "@google-cloud/speech/build/protos/protos";
 import ISpeechRecognitionResult = google.cloud.speech.v1.ISpeechRecognitionResult;
-import {BucketStorageService} from "./bucket-storage.service";
+import {BucketStorageService} from "../../services/google/bucket-storage.service";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -32,12 +32,11 @@ export class AppComponent {
   private loggedIn: boolean;
   private gsAudioUri: string;
 
-  constructor(private router: Router, private http: HttpClient, private authService: SocialAuthService, private bucketService: BucketStorageService, private speechService: SpeechService, private domSanitizer: DomSanitizer) {
+  constructor(private http: HttpClient, private authService: SocialAuthService, private bucketService: BucketStorageService, private speechService: SpeechService, private domSanitizer: DomSanitizer) {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
     });
-    // this.router.navigate([`./meet`]);
   }
 
   signInWithRest() {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grigor</title>
+</head>
+<body>
+<br>
+<br>
+<br>
+<div class="input-field" id="some" *ngIf="!live">
+  <label class="active">Channel name</label>
+  <input type="text" placeholder="channel name" name="channelName" id="channelName">
+</div>
+<button (click)="start()" *ngIf="!live">Submit</button>
+</body>
+</html>
+
+
+
+
+

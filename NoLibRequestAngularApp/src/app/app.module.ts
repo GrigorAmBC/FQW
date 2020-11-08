@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 
 import {SocialLoginModule, SocialAuthServiceConfig} from 'angularx-social-login';
@@ -10,10 +9,14 @@ import {
 } from 'angularx-social-login';
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule, routingComponents} from "./app-routing.module";
+import {MeetComponent} from "./components/meet/meet.component";
+import {AppComponent} from "./components/main/app.component";
 
 @NgModule({
   declarations: [
-    routingComponents
+    AppComponent,
+    MeetComponent
+    // routingComponents
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import {AppRoutingModule, routingComponents} from "./app-routing.module";
       ],
     } as SocialAuthServiceConfig,
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [MeetComponent]
 })
 export class AppModule {
 }
