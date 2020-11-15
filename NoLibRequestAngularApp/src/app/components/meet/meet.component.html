@@ -3,13 +3,23 @@
 <head>
   <title>Grigor</title>
 </head>
-<body>
-<br>
-<br>
-<br>
+<body marginheight="40px">
+<label *ngIf="live">Show</label>
 <div class="input-field" id="some" *ngIf="!live">
   <label class="active">Channel name</label>
   <input type="text" placeholder="channel name" name="channelName" id="channelName">
+</div>
+<div *ngIf="live">
+  <button *ngIf="playing.videoPlaying" (click)="setVideoPlaying(false)">Video off</button>
+  <button *ngIf="!playing.videoPlaying" (click)="setVideoPlaying(true)">Video on</button>
+  <button *ngIf="playing.audioPlaying" (click)="setAudioPlaying(false)">Audio off</button>
+  <button *ngIf="!playing.audioPlaying" (click)="setAudioPlaying(true)">Audio on</button>
+  <label [textContent]="meetingName"></label>
+</div>
+
+<div id="subContainer" >
+</div>
+<div id="mainContainer">
 </div>
 <button (click)="start()" *ngIf="!live">Submit</button>
 </body>
