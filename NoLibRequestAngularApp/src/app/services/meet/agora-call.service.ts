@@ -40,6 +40,7 @@ export class AgoraCallService {
     return promise
   }
 
+
   getStreams(): RTC {
     return this.rtc;
   }
@@ -75,20 +76,13 @@ export class AgoraCallService {
   }
 
   async leave() {
-
+    this.rtc.localAudioTrack.getMediaStreamTrack();
   }
 
   async publishAudioVideo(container: HTMLDivElement) {
     await this.publishAudio();
     await this.publishVideo(container);
     console.log("publish success!");
-
-    /*// Create an audio track from the audio sampled by a microphone.
-    this.rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-    // Create a video track from the video captured by a camera.
-    this.rtc.localVideoTrack = await AgoraRTC.createCameraVideoTrack();
-    // Publish the local audio and video tracks to the channel.
-    await this.rtc.client.publish([this.rtc.localAudioTrack, this.rtc.localVideoTrack]);*/
   }
 
   getLocalClientUid(): string {

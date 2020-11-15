@@ -1,8 +1,8 @@
 
 class HtmlValues {
-  smallWidth ="10px";
+  smallWidth ="10vw";
 
-  smallHeight = "10px";
+  smallHeight = "10vh";
 
   fullScreenWidth = "100vw";
   fullScreenHeight = "100vh";

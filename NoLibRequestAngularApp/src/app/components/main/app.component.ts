@@ -8,7 +8,6 @@ import ISpeechRecognitionResult = google.cloud.speech.v1.ISpeechRecognitionResul
 import {BucketStorageService} from "../../services/google/bucket-storage.service";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -123,7 +122,7 @@ export class AppComponent {
    * @param  {any} blob Blog
    */
   processRecording(blob: Blob) {
-    this.blob = blob
+    this.blob = blob;
     this.url = URL.createObjectURL(blob);
   }
 

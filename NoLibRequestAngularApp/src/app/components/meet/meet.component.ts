@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AgoraCallService} from "../../services/meet/agora-call.service";
-import {IAgoraRTCClient, IRemoteVideoTrack} from "agora-rtc-sdk-ng";
+import AgoraRTC, {IAgoraRTCClient, IRemoteVideoTrack} from "agora-rtc-sdk-ng";
+import * as RecordRTC from 'recordrtc';
+import {Recorder} from "./utils/record";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-meet',
@@ -9,19 +12,26 @@ import {IAgoraRTCClient, IRemoteVideoTrack} from "agora-rtc-sdk-ng";
 })
 export class MeetComponent implements OnInit {
 
+  private recorder = new Recorder();
+
   meetingName: string;
   live = false;
   subContainer: HTMLDivElement;
   mainContainer: HTMLDivElement;
   client: IAgoraRTCClient;
+  interviewRecording = false;
+  url = null;
 
   playing = {
     audioPlaying: false,
     videoPlaying: false
   };
 
+  constructor(private meetService: AgoraCallService, private domSanitizer: DomSanitizer) {
+  }
 
-  constructor(private meetService: AgoraCallService) {
+  sanitize(url: string) {
+    return this.domSanitizer.bypassSecurityTrustUrl(url);
   }
 
   ngOnInit(): void {
@@ -41,10 +51,11 @@ export class MeetComponent implements OnInit {
     // join, publish all things todo: implement authentication to get token, save it in cookies
     const channelNameDoc = document.getElementById("channelName") as HTMLInputElement;
     this.meetService.join(channelNameDoc.value).then(
-      ok => {
-        this.meetService.publishAudioVideo(this.getMainContainer()).then(ok => {
+      () => {
+        this.meetService.publishAudioVideo(this.getMainContainer()).then(() => {
           this.live = true;
           this.meetingName = channelNameDoc.value;
+          this.recorder.addTrack(this.meetService.getStreams().localAudioTrack.getMediaStreamTrack());//todo:wtf
           this.setVideoPlaying(true);
           this.setAudioPlaying(true);
         });
@@ -66,17 +77,12 @@ export class MeetComponent implements OnInit {
       if (mediaType === "video") {
         const remoteVideoTrack = user.videoTrack;
         this.addSmallVideoTrackDiv(remoteVideoTrack, user.uid.toString())
-        /* const playerContainer = MeetComponent
-           .getVideoContainer(user.uid.toString(), "10vw", "10vh");
-         playerContainer.style.float = "right";
-         document.body.append(playerContainer);
-
-         remoteVideoTrack.play(playerContainer);*/
       }
 
       if (mediaType === "audio") {
         const remoteAudioTrack = user.audioTrack;
         remoteAudioTrack.play();
+        this.recorder.addTrack(remoteAudioTrack.getMediaStreamTrack());
       }
     });
   }
@@ -107,7 +113,6 @@ export class MeetComponent implements OnInit {
     container.style.height = height;
   }
 
-
   private static getVideoContainer(id: string, width: string, height: string, padding: string = "0"): HTMLDivElement {
     const playerContainer = document.createElement("div");
     playerContainer.id = id;
@@ -115,6 +120,27 @@ export class MeetComponent implements OnInit {
     playerContainer.style.padding = padding;
     playerContainer.style.height = height;
     return playerContainer;
+  }
+
+  getMainContainer(): HTMLDivElement {
+    let oldContainer = this.mainContainer.childNodes.item(0) as HTMLDivElement;
+    // let oldContainer = document.getElementById(this.client.uid.toString()) as HTMLDivElement;
+
+
+    if (oldContainer == null) {
+      oldContainer = MeetComponent
+        .getVideoContainer(this.meetService.getLocalClientUid(),
+          HtmlValues.fullScreenWidth,
+          HtmlValues.fullScreenHeight,
+          HtmlValues.bigPadding);
+      this.putMyContainerMain(oldContainer);
+    }
+
+    return oldContainer;
+  }
+
+  putMyContainerMain(container: HTMLDivElement) {
+    this.mainContainer.append(container);
   }
 
   async setVideoPlaying(publish: boolean) {
@@ -127,37 +153,44 @@ export class MeetComponent implements OnInit {
     }
   }
 
-  getMainContainer(): HTMLDivElement {
-    let oldContainer1 = this.mainContainer.childNodes.item(0) as HTMLDivElement;
-    // let oldContainer = document.getElementById(this.client.uid.toString()) as HTMLDivElement;
-    
-
-    if (oldContainer1 == null) {
-      oldContainer = MeetComponent
-        .getVideoContainer(this.meetService.getLocalClientUid(),
-          HtmlValues.fullScreenWidth,
-          HtmlValues.fullScreenHeight,
-          HtmlValues.bigPadding);
-      this.putMyContainerMain(oldContainer);
-    }
-
-    return oldContainer;
-  }
-
-
-  putMyContainerMain(container: HTMLDivElement) {
-    this.mainContainer.append(container);
-  }
-
   async setAudioPlaying(publish: boolean) {
     this.playing.audioPlaying = publish;
 
     if (publish) {
       await this.meetService.publishAudio();
+      this.recorder.addTrack(this.meetService.getStreams().localAudioTrack.getMediaStreamTrack())
     } else {
       await this.meetService.unpublishAudio();
+      this.recorder.removeTrack(this.meetService.getStreams().localAudioTrack.getMediaStreamTrack())
     }
   }
+
+  startRecordingMeetingAudio() {
+    this.url = null;
+    this.recorder.startRecording();
+    this.interviewRecording = true;
+  }
+
+  stopRecordingMeetingAudio() {
+    this.interviewRecording = false;
+    this.recorder.stopRecording(blob => {
+      console.log(blob);
+      this.url = URL.createObjectURL(blob);
+    });
+  }
+
+  endMeetingInterview() {// transcribe audio, return result, maybe later add ability to notify the other user.
+
+  }
+
+  /*async pickMicrophone() {
+    //https://agoraio-community.github.io/AgoraWebSDK-NG/api/en/interfaces/microphoneaudiotrackinitconfig.html
+    //https://agoraio-community.github.io/AgoraWebSDK-NG/api/en/interfaces/iagorartc.html#createmicrophoneaudiotrack
+    const devices = await AgoraRTC.getMicrophones();
+
+    await AgoraRTC.createMicrophoneAudioTrack();
+
+  }*/
 }
 
 class HtmlValues {
@@ -166,5 +199,4 @@ class HtmlValues {
   static fullScreenWidth = "100vw";
   static fullScreenHeight = "100vh";
   static bigPadding: string = "20px";
-
 }
