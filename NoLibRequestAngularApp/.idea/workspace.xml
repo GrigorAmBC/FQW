@@ -18,11 +18,10 @@
   <component name="ChangeListManager">
     <list default="true" id="39d3d1de-253d-4ab4-93d6-cfafe1f5df05" name="Default Changelist" comment="added video conference feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/main/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/main/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/meet/meet.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/meet.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/meet/meet.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/meet.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/meet/utils/html.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/utils/html.utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/meet/agora-call.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/meet/agora-call.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/meet/utils/record.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/utils/record.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/google/speech.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/google/speech.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -56,6 +56,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -155,6 +156,10 @@
       <workItem from="1604911122010" duration="5520000" />
       <workItem from="1604991464761" duration="43000" />
       <workItem from="1605410409089" duration="11485000" />
+      <workItem from="1605495126020" duration="5700000" />
+      <workItem from="1605676932990" duration="358000" />
+      <workItem from="1605933782059" duration="3827000" />
+      <workItem from="1606194002605" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="added video conference feature">
       <created>1605410501955</created>
@@ -239,15 +244,15 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="0" y="0" width="1250" height="676" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1602821855135" />
-    <state x="346" y="88" width="587" height="534" key="find.popup" timestamp="1604726014680">
+    <state x="346" y="88" width="587" height="534" key="find.popup" timestamp="1605500657721">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="346" y="88" width="587" height="534" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1604726014680" />
+    <state x="346" y="88" width="587" height="534" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1605500657721" />
     <state x="346" y="93" width="587" height="534" key="find.popup/0.0.1280.720@0.0.1280.720" timestamp="1601792733378" />
-    <state width="389" height="292" key="javadoc.popup.new" timestamp="1605431016604">
+    <state width="389" height="292" key="javadoc.popup.new" timestamp="1605501917844">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="389" height="292" key="javadoc.popup.new/0.0.1280.680@0.0.1280.680" timestamp="1605431016604" />
+    <state width="389" height="292" key="javadoc.popup.new/0.0.1280.680@0.0.1280.680" timestamp="1605501917844" />
     <state x="139" y="43" key="new project wizard" timestamp="1602219992691">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

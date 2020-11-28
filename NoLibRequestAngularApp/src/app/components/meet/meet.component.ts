@@ -1,9 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {AgoraCallService} from "../../services/meet/agora-call.service";
-import AgoraRTC, {IAgoraRTCClient, IRemoteVideoTrack} from "agora-rtc-sdk-ng";
-import * as RecordRTC from 'recordrtc';
+import {IAgoraRTCClient, IRemoteVideoTrack} from "agora-rtc-sdk-ng";
 import {Recorder} from "./utils/record";
 import {DomSanitizer} from "@angular/platform-browser";
+import {SpeechService} from "../../services/google/speech.service";
+import {BucketStorageService} from "../../services/google/bucket-storage.service";
+import {google} from "@google-cloud/speech/build/protos/protos";
+import ISpeechRecognitionResult = google.cloud.speech.v1.ISpeechRecognitionResult;
+import {IDialogPart} from "../../services/google/types";
 
 @Component({
   selector: 'app-meet',
@@ -11,7 +15,6 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./meet.component.css']
 })
 export class MeetComponent implements OnInit {
-
   private recorder = new Recorder();
 
   meetingName: string;
@@ -26,8 +29,11 @@ export class MeetComponent implements OnInit {
     audioPlaying: false,
     videoPlaying: false
   };
+  private blob: Blob = null;
+  private gsAudioUri: string;
 
-  constructor(private meetService: AgoraCallService, private domSanitizer: DomSanitizer) {
+  constructor(private meetService: AgoraCallService, private speechService: SpeechService,
+              private bucketService: BucketStorageService, private domSanitizer: DomSanitizer) {
   }
 
   sanitize(url: string) {
@@ -55,7 +61,7 @@ export class MeetComponent implements OnInit {
         this.meetService.publishAudioVideo(this.getMainContainer()).then(() => {
           this.live = true;
           this.meetingName = channelNameDoc.value;
-          this.recorder.addTrack(this.meetService.getStreams().localAudioTrack.getMediaStreamTrack());//todo:wtf
+          this.recorder.addTrack(this.meetService.getStreams().localAudioTrack.getMediaStreamTrack());
           this.setVideoPlaying(true);
           this.setAudioPlaying(true);
         });
@@ -67,7 +73,7 @@ export class MeetComponent implements OnInit {
   private makeSubscriptions() {
     this.client.on("user-unpublished", user => {
       const playerContainer = document.getElementById(user.uid.toString());
-      playerContainer.remove();
+      playerContainer.remove();//todo: do we need to delete recording stream here?
     });
 
     this.client.on("user-published", async (user, mediaType) => {
@@ -176,12 +182,40 @@ export class MeetComponent implements OnInit {
     this.recorder.stopRecording(blob => {
       console.log(blob);
       this.url = URL.createObjectURL(blob);
+      this.blob = blob;
     });
   }
 
   endMeetingInterview() {// transcribe audio, return result, maybe later add ability to notify the other user.
 
   }
+
+  async recordedAudioToText() {
+    if (this.url == null) {
+      console.log("No audio recorded!");
+      return;
+    }
+    const file = this.bucketService.blobToFile(this.blob, "some.wav")
+    this.gsAudioUri = await this.bucketService.uploadFile(file);
+    this.speechService
+      .makeLongRunningRecognizeCall(
+        this.gsAudioUri,
+        this.showLongRunningRecognizeDialog, 2);
+  }
+
+  public showLongRunningRecognizeDialog(results: ISpeechRecognitionResult[]) {
+    const dialog: IDialogPart[] = SpeechService.getRecognizeResponseDialog(results);
+    if (dialog.length == 0) {
+     console.log("could not recognize\n");
+    } else {
+      let res: string = "";
+      dialog.forEach(part => {
+        res += `speaker-${part.speakerTag}: ${part.content}\n`;
+      });
+      console.log(res);
+    }
+  }
+
 
   /*async pickMicrophone() {
     //https://agoraio-community.github.io/AgoraWebSDK-NG/api/en/interfaces/microphoneaudiotrackinitconfig.html

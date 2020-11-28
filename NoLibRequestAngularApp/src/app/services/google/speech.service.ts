@@ -58,7 +58,9 @@ export class SpeechService {
     }).toPromise();
   }
 
-  public async makeLongRunningRecognizeCall(gsFileUri: string, callback = null, speakerCount: number = 1) {
+  public async makeLongRunningRecognizeCall(gsFileUri: string,
+                                            callback: (results: ISpeechRecognitionResult[]) => void,
+                                            speakerCount: number = 1) {
     // Reads a local audio file and converts it to base64
 
     const audio = {

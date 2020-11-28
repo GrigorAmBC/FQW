@@ -16,9 +16,14 @@
   <button *ngIf="!playing.audioPlaying" (click)="setAudioPlaying(true)">Audio on</button>
   <button *ngIf="!interviewRecording" (click)="startRecordingMeetingAudio()">Start recording audio</button>
   <button *ngIf="interviewRecording" (click)="stopRecordingMeetingAudio()">Stop recording audio</button>
-  <audio controls="" *ngIf="url">
-    <source [src]="sanitize(url)" type="audio/wav">
-  </audio>
+  <div *ngIf="url">
+    <audio controls="">
+      <source [src]="sanitize(url)" type="audio/wav">
+    </audio>
+    <button (click)="recordedAudioToText()">Transcribe</button>
+  </div>
+
+
 <!--  <button (click)="endMeetingInterview()">End interview</button>-->
   <label [textContent]="meetingName"></label>
 </div>
