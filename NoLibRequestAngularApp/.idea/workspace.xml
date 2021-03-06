@@ -16,12 +16,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39d3d1de-253d-4ab4-93d6-cfafe1f5df05" name="Default Changelist" comment="added video conference feature">
+    <list default="true" id="39d3d1de-253d-4ab4-93d6-cfafe1f5df05" name="Default Changelist" comment="meeting recording with google service transcribing to text">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/meet/meet.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/meet.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/meet/meet.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/meet.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/meet/utils/record.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/meet/utils/record.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/google/speech.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/google/speech.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,11 +73,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app\components" />
+      <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app\services\google" />
       <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app" />
       <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app\types" />
       <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app\types\agora" />
-      <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app\components\main" />
-      <recent name="C:\Users\grigo\Desktop\FQW\FinalQualificationWorkGit\NoLibRequestAngularApp\src\app\services\google" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -160,6 +158,16 @@
       <workItem from="1605676932990" duration="358000" />
       <workItem from="1605933782059" duration="3827000" />
       <workItem from="1606194002605" duration="12000" />
+      <workItem from="1606533130122" duration="1382000" />
+      <workItem from="1606633303707" duration="310000" />
+      <workItem from="1606967320028" duration="826000" />
+      <workItem from="1607139420517" duration="3000" />
+      <workItem from="1607404979640" duration="83000" />
+      <workItem from="1607945073761" duration="91000" />
+      <workItem from="1608439248418" duration="791000" />
+      <workItem from="1610937573240" duration="15000" />
+      <workItem from="1612585463407" duration="1268000" />
+      <workItem from="1612854313082" duration="1502000" />
     </task>
     <task id="LOCAL-00001" summary="added video conference feature">
       <created>1605410501955</created>
@@ -168,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605410501955</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="meeting recording with google service transcribing to text">
+      <created>1606533199627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606533199627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,7 +208,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added video conference feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="added video conference feature" />
+    <MESSAGE value="meeting recording with google service transcribing to text" />
+    <option name="LAST_COMMIT_MESSAGE" value="meeting recording with google service transcribing to text" />
   </component>
   <component name="WindowStateProjectService">
     <state x="121" y="0" key="#Project_Structure" timestamp="1603711234732">
@@ -228,10 +244,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="92" y="80" key="RollbackChangesDialog/0.0.1280.680@0.0.1280.680" timestamp="1603701000111" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1604917268020">
+    <state x="142" y="0" key="SettingsEditor" timestamp="1607945160009">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1604917268020" />
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1607945160009" />
     <state x="233" y="93" key="Vcs.Push.Dialog.v2" timestamp="1605410506528">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

@@ -11,11 +11,13 @@ import {FormsModule} from "@angular/forms";
 import {AppRoutingModule, routingComponents} from "./app-routing.module";
 import {MeetComponent} from "./components/meet/meet.component";
 import {AppComponent} from "./components/main/app.component";
+import { DocsComponent } from './components/docs/docs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MeetComponent
+    MeetComponent,
+    DocsComponent
     // routingComponents
   ],
   imports: [
@@ -39,7 +41,8 @@ import {AppComponent} from "./components/main/app.component";
       ],
     } as SocialAuthServiceConfig,
   }],
-  bootstrap: [MeetComponent]
+  bootstrap: [AppComponent]
+  // bootstrap: [MeetComponent]
 })
 export class AppModule {
 }
